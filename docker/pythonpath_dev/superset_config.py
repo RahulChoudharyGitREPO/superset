@@ -133,6 +133,20 @@ if os.getenv("CYPRESS_CONFIG") == "true":
 # Optionally import superset_config_docker.py (which will have been included on
 # the PYTHONPATH) in order to allow for local settings to be overridden
 #
+HTTP_HEADERS={"X-Frame-Options":"ALLOWALL"}
+ENABLE_CORS = True
+CORS_OPTIONS = {
+    "supports_credentials": True,
+    "allow_headers": ["*"],
+    "resources": ["*"],
+    "origins": ["*"],
+        }
+TALISMAN_ENABLED = False
+SESSION_COOKIE_SAMESITE = None
+SESSION_COOKIE_SECURE = True 
+SESSION_COOKIE_HTTPONLY = False
+WTF_CSRF_ENABLED = False
+FAB_ADD_SECURITY_API = True
 try:
     import superset_config_docker
     from superset_config_docker import *  # noqa: F403

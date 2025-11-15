@@ -58,7 +58,7 @@ const {
 } = parsedArgs;
 
 // Precedence: CLI args > env vars > defaults
-const devserverPort = cliPort || process.env.WEBPACK_DEVSERVER_PORT || 9000;
+const devserverPort = cliPort || process.env.WEBPACK_DEVSERVER_PORT || 9002;
 const devserverHost =
   cliHost || process.env.WEBPACK_DEVSERVER_HOST || '127.0.0.1';
 
@@ -136,7 +136,11 @@ const plugins = [
   }),
 
   new CopyPlugin({
-    patterns: ['package.json', { from: 'src/assets/images', to: 'images' }],
+    patterns: [
+      'package.json',
+      { from: 'src/assets/images', to: 'images' },
+      { from: 'src/assets/branding', to: 'branding' },
+    ],
   }),
 
   // static pages

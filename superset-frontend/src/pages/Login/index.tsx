@@ -159,7 +159,7 @@ export default function Login() {
         height: calc(100vh - 200px);
       `}
     >
-      <StyledCard title={t('Sign in')} padded>
+      <StyledCard title={t('  Sign in')} padded>
         {authType === AuthType.AuthOID && (
           <Flex justify="center" vertical gap="middle">
             <Form layout="vertical" requiredMark="optional" form={form}>

@@ -253,6 +253,11 @@ export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
   if (error) throw error; // caught in error boundary
 
   const DashboardBuilderComponent = useMemo(() => <DashboardBuilder />, []);
+  // return (
+  //   <div>
+  //     <p>hello</p>
+  //   </div>
+  // );
   return (
     <>
       <Global styles={globalStyles} />
