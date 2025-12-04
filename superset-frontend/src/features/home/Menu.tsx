@@ -17,7 +17,7 @@
  * under the License.
  */
 import { useState, useEffect } from 'react';
-import { styled, css, useTheme } from '@superset-ui/core';
+import { styled, css, useTheme, isThemeDark } from '@superset-ui/core';
 import { debounce } from 'lodash';
 import { getUrlParam } from 'src/utils/urlUtils';
 import { MainNav, MenuMode } from '@superset-ui/core/components/Menu';
@@ -28,7 +28,8 @@ import { Icons } from '@superset-ui/core/components/Icons';
 import { Typography } from '@superset-ui/core/components/Typography';
 import { useUiConfig } from 'src/components/UiConfigContext';
 import { URL_PARAMS } from 'src/constants';
-import relificLogo from 'src/assets/branding/relific-logo-horiz.png';
+import relificLogoLight from 'src/assets/branding/relific-logo-horiz.png';
+import relificLogoDark from 'src/assets/branding/RelificDarkFull.png';
 import {
   MenuObjectChildProps,
   MenuObjectProps,
@@ -162,6 +163,9 @@ export function Menu({
   const screens = useBreakpoint();
   const uiConfig = useUiConfig();
   const theme = useTheme();
+
+  // Dynamically select logo based on theme (dark theme uses light logo, light theme uses dark logo)
+  const currentLogo = isThemeDark(theme) ? relificLogoLight : relificLogoDark;
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -315,7 +319,7 @@ export function Menu({
         >
           <Image
             preview={false}
-            src={relificLogo}
+            src={currentLogo}
             alt={theme.brandLogoAlt || 'Apache Superset'}
           />
         </Typography.Link>
@@ -326,7 +330,7 @@ export function Menu({
       // Kept as is for backwards compatibility with the old theme system / superset_config.py
       link = (
         <GenericLink className="navbar-brand" to={brand.path}>
-          <Image preview={false} src={relificLogo} alt={brand.alt} />
+          <Image preview={false} src={currentLogo} alt={brand.alt} />
         </GenericLink>
       );
     } else {
@@ -336,7 +340,7 @@ export function Menu({
           href={brand.path}
           tabIndex={-1}
         >
-          <Image preview={false} src={relificLogo} alt={brand.alt} />
+          <Image preview={false} src={currentLogo} alt={brand.alt} />
         </Typography.Link>
       );
     }

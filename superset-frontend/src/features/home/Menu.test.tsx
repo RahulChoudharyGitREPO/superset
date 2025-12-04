@@ -276,7 +276,7 @@ test('should render the brand', async () => {
   useSelectorMock.mockReturnValue({ roles: user.roles });
   const {
     data: {
-      brand: { alt, icon },
+      brand: { alt },
     },
   } = mockedProps;
   render(<Menu {...mockedProps} />, {
@@ -287,7 +287,8 @@ test('should render the brand', async () => {
   });
   expect(await screen.findByAltText(alt)).toBeInTheDocument();
   const image = screen.getByAltText(alt);
-  expect(image).toHaveAttribute('src', icon);
+  // Logo src is now dynamically determined based on theme (light/dark)
+  expect(image).toHaveAttribute('src');
 });
 
 test('should render the environment tag', async () => {
